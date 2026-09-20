@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veerasingam M. | Web Developer Portfolio</title>
+  <meta name="description" content="Veerasingam M. - Final year B.Sc CS student, aspiring Full Stack Developer. Play Bold.">
+
+  <!-- Google Fonts: Space Grotesk (headings), Inter (body), JetBrains Mono (labels/code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================================================================
+       CANVAS BACKGROUND
+       This canvas sits behind everything (position: fixed) and script.js
+       draws a lightweight moving particle field on it.
+  ==================================================================== -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Custom cursor (desktop only — hidden via CSS on touch devices) -->
+  <div id="custom-cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- ===================================================================
+       NAVBAR
+       data-section attributes on links match the "id" of each <section>.
+       script.js uses this to know which link to highlight (scroll-spy).
+  ==================================================================== -->
+  <header class="navbar" id="navbar">
+    <nav class="nav-container">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero" class="nav-link active" data-section="hero">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Dark/Light toggle button. script.js swaps the icon + saves choice in localStorage -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark and light mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+
+        <!-- Hamburger for mobile -->
+        <button id="menu-toggle" class="menu-toggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================================================================
+         HERO SECTION
+    ==================================================================== -->
+    <section id="hero" class="section hero">
+      <!-- Faint line-art lion mark: the one "signature" flourish of the design -->
+      <svg class="lion-mark" viewBox="0 0 400 400" aria-hidden="true">
+        <path d="M200 60c-18 0-33 14-38 32-14-6-30-2-38 10-10-14-30-16-42-6-10 8-12 24-4 36-16 4-26 20-22 36 3 12 14 20 26 20-6 16 2 34 18 40 14 5 28 0 36-10 8 14 24 22 40 22s32-8 40-22c8 10 22 15 36 10 16-6 24-24 18-40 12 0 23-8 26-20 4-16-6-32-22-36 8-12 6-28-4-36-12-10-32-8-42 6-8-12-24-16-38-10-5-18-20-32-38-32z" fill="none" stroke="url(#lionGrad)" stroke-width="1.5"/>
+        <circle cx="180" cy="150" r="4" fill="url(#lionGrad)"/>
+        <circle cx="220" cy="150" r="4" fill="url(#lionGrad)"/>
+        <defs>
+          <linearGradient id="lionGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00d4ff"/>
+            <stop offset="1" stop-color="#a855f7"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <div class="hero-content">
+        <!-- Profile picture (assets/profile.jpg), framed in a glowing ring
+             to match the site's neon glass identity -->
+        <div class="profile-avatar">
+          <img src="assets/profile.jpg" alt="Portrait of Veerasingam M." width="480" height="480">
+        </div>
+
+        <p class="eyebrow">Play Bold — Kumbakonam, Tamil Nadu</p>
+        <h1 class="hero-name">Veerasingam M</h1>
+
+        <!-- Typing animation target: script.js types text into this span -->
+        <p class="hero-tagline">
+          <span id="typing-text"></span><span class="typing-cursor">|</span>
+        </p>
+
+        <p class="hero-desc">
+          Final-year B.Sc. Computer Science student building real, working software —
+          not just tutorials. Aspiring Full Stack Developer, ready to learn fast and ship faster.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <!-- download attribute forces a file download instead of opening in-browser -->
+          <a href="assets/Veerasingam_Resume.pdf" class="btn btn-ghost" download="Veerasingam_Resume.pdf">Download Resume</a>
+          <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-hint" aria-label="Scroll to About section">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ===================================================================
+         ABOUT SECTION
+    ==================================================================== -->
+    <section id="about" class="section about">
+      <p class="section-label">01 / About</p>
+      <h2 class="section-title">The person behind the code</h2>
+
+      <div class="about-grid">
+        <div class="glass-card about-text">
+          <p>
+            I'm Veerasingam. I'm in my final year of
+            B.Sc. Computer Science at Swami Dayananda College, and I'm chasing
+            one goal right now: my first developer role, as a Web Developer or
+            Full Stack Developer fresher.
+          </p>
+          <p>
+            I don't copy-paste code to learn — I type every line myself, break
+            it, fix it, and understand why it works. That habit is slower, but
+            it's the reason I can actually build things like this portfolio
+            site from scratch instead of just following along.
+          </p>
+          <p>
+            Outside of code, anime shapes a lot of how I think about design —
+            bold characters, clean composition, a story worth telling. That's
+            where "Play Bold" comes from.
+          </p>
+        </div>
+
+        <div class="about-facts">
+          <div class="glass-card fact-card">
+            <span class="fact-label">Location</span>
+            <span class="fact-value">Kumbakonam, Tamil Nadu, IN</span>
+          </div>
+          <div class="glass-card fact-card">
+            <span class="fact-label">Focus</span>
+            <span class="fact-value">Web Development / Full Stack</span>
+          </div>
+          <div class="glass-card fact-card">
+            <span class="fact-label">Status</span>
+            <span class="fact-value">Final Year — Open to Fresher Roles</span>
+          </div>
+          <div class="glass-card fact-card">
+            <span class="fact-label">Learning Style</span>
+            <span class="fact-value">Hands-on, project-first, manual typing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SKILLS SECTION
+         Each .skill-bar has a data-level (0-100). script.js uses
+         IntersectionObserver to animate the .skill-fill width when the
+         bar scrolls into view, and updates the % text at the same time.
+    ==================================================================== -->
+    <section id="skills" class="section skills">
+      <p class="section-label">02 / Skills</p>
+      <h2 class="section-title">What I build with</h2>
+
+      <div class="skills-grid">
+
+        <div class="glass-card skill-group">
+          <h3 class="skill-group-title">Frontend</h3>
+
+          <div class="skill-bar" data-level="85">
+            <div class="skill-bar-top">
+              <span class="skill-name">HTML</span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <div class="skill-bar" data-level="80">
+            <div class="skill-bar-top">
+              <span class="skill-name">CSS</span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <div class="skill-bar" data-level="70">
+            <div class="skill-bar-top">
+              <span class="skill-name">JavaScript</span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <div class="skill-bar" data-level="65">
+            <div class="skill-bar-top">
+              <span class="skill-name">Bootstrap</span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <div class="skill-bar" data-level="45">
+            <div class="skill-bar-top">
+              <span class="skill-name">React.js <span class="tag-learning">learning</span></span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="glass-card skill-group">
+          <h3 class="skill-group-title">Backend &amp; Database</h3>
+
+          <div class="skill-bar" data-level="40">
+            <div class="skill-bar-top">
+              <span class="skill-name">Node.js <span class="tag-learning">learning</span></span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <div class="skill-bar" data-level="35">
+            <div class="skill-bar-top">
+              <span class="skill-name">Express.js <span class="tag-learning">learning</span></span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <div class="skill-bar" data-level="35">
+            <div class="skill-bar-top">
+              <span class="skill-name">MongoDB <span class="tag-learning">learning</span></span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <h3 class="skill-group-title skill-group-title-spaced">Tools</h3>
+
+          <div class="skill-bar" data-level="70">
+            <div class="skill-bar-top">
+              <span class="skill-name">Git &amp; GitHub</span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <div class="skill-bar" data-level="60">
+            <div class="skill-bar-top">
+              <span class="skill-name">Python</span>
+              <span class="skill-percent">0%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION — UPDATED 3-PROJECT SHOWCASE -->
+    <section id="projects" class="section projects">
+      <p class="section-label">03 / Projects</p>
+      <h2 class="section-title">Built, not just tutorial-followed</h2>
+      <p class="projects-intro">Three real projects that show how I turn ideas into usable web experiences.</p>
+
+      <article class="project-card project-card-featured glass-card project-theme-anime" data-tilt>
+        <div class="project-visual project-visual-anime" aria-label="AnimeHaven project concept preview">
+          <span class="project-number">01</span><span class="project-concept-label">PROJECT CONCEPT</span>
+          <div class="anime-ui-shell">
+            <div class="anime-ui-topbar"><span class="mini-brand">AnimeHaven</span><span class="mini-search">⌕ Search anime...</span><span class="mini-dot"></span></div>
+            <div class="anime-ui-hero"><div><span class="mini-kicker">DISCOVER • EXPLORE • WATCH</span><strong>Find your next<br>favorite anime.</strong></div><span class="mini-orbit">✦</span></div>
+            <div class="anime-ui-row"><div class="mini-content-card"><span class="mini-poster poster-a"></span><span>Trending</span></div><div class="mini-content-card"><span class="mini-poster poster-b"></span><span>Top Anime</span></div><div class="mini-content-card"><span class="mini-poster poster-c"></span><span>Genres</span></div></div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-meta-row"><span class="project-category">Anime Recommendation &amp; Discovery Platform</span><span class="project-status status-anime">In Development</span></div>
+          <h3 class="project-title">AnimeHaven</h3><p class="project-subtitle">Main / Current Project</p>
+          <p class="project-desc">AnimeHaven is a modern anime discovery and recommendation platform designed to help users discover anime through search, categories, trending content, ratings, watchlists, and personalized exploration.</p>
+          <ul class="project-features"><li>Anime discovery, recommendations, and personalized exploration</li><li>Global search, trending, top anime, ongoing titles, and genre exploration</li><li>Anime series, anime movies, and manga discovery</li><li>Anime details, ratings, reviews, watchlist, and watch history concepts</li></ul>
+          <div class="project-stack"><span class="stack-chip">PHP</span><span class="stack-chip">MySQL</span><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JavaScript</span><span class="stack-chip">XAMPP</span></div>
+        </div>
+      </article>
+
+      <article class="project-card project-card-secondary glass-card project-theme-aptitude" data-tilt>
+        <div class="project-visual project-visual-aptitude" aria-label="Crack Aptitude project concept preview">
+          <span class="project-number">02</span><span class="project-concept-label">PROJECT CONCEPT</span>
+          <div class="aptitude-ui-shell"><div class="aptitude-header"><span class="mini-brand">Crack Aptitude</span><span class="mini-progress">Practice</span></div><div class="aptitude-score"><span class="score-ring">?</span><div><span class="mini-kicker">APTITUDE PRACTICE</span><strong>Choose your challenge.</strong></div></div><div class="aptitude-options"><span>Quantitative</span><span>Logical Reasoning</span><span>Problem Solving</span></div><div class="aptitude-question"><span class="question-line"></span><span class="question-line short"></span><div class="answer-grid"><span>A</span><span>B</span><span>C</span><span>D</span></div></div></div>
+        </div>
+        <div class="project-info">
+          <div class="project-meta-row"><span class="project-category">Aptitude Practice &amp; Placement Preparation Platform</span><span class="project-status status-aptitude">In Development</span></div>
+          <h3 class="project-title">Crack Aptitude</h3><p class="project-subtitle">Practice-focused learning project</p>
+          <p class="project-desc">Crack Aptitude is an aptitude practice website designed to help IT students and freshers strengthen quantitative aptitude, logical reasoning, and problem-solving skills for placement preparation.</p>
+          <ul class="project-features"><li>Aptitude practice and structured practice sessions</li><li>Quantitative aptitude and logical reasoning</li><li>Beginner-friendly problem-solving practice</li><li>Placement and interview preparation focus</li></ul>
+          <div class="project-stack"><span class="stack-chip">PHP</span><span class="stack-chip">MySQL</span><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JavaScript</span></div>
+        </div>
+      </article>
+
+      <article class="project-card project-card-secondary glass-card project-theme-portfolio" data-tilt>
+        <div class="project-visual project-visual-portfolio" aria-label="Personal portfolio project preview">
+          <span class="project-number">03</span><span class="project-concept-label">PROJECT PREVIEW</span>
+          <div class="portfolio-ui-shell"><div class="portfolio-window-top"><span></span><span></span><span></span></div><div class="portfolio-window-body"><div class="portfolio-avatar-mini">VM</div><div class="portfolio-lines"><span class="line-lg"></span><span class="line-md"></span><span class="line-sm"></span></div><div class="portfolio-pill-row"><span>About</span><span>Skills</span><span>Projects</span></div></div></div>
+        </div>
+        <div class="project-info">
+          <div class="project-meta-row"><span class="project-category">Personal Developer Portfolio</span><span class="project-status status-portfolio">Existing</span></div>
+          <h3 class="project-title">Personal Portfolio Website</h3><p class="project-subtitle">This website</p>
+          <p class="project-desc">Built a fully responsive personal portfolio website with a modern glassmorphism interface.</p>
+          <ul class="project-features"><li>Dark / Light Mode</li><li>Particle Background</li><li>Typing Animation</li><li>Custom Cursor</li><li>Scroll Spy</li><li>Responsive Design</li><li>Interactive UI</li></ul>
+          <div class="project-stack"><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JavaScript</span></div>
+          <div class="project-links"><a href="https://github.com/veerasingamm30-code" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">GitHub</a></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===================================================================
+         EDUCATION SECTION
+    ==================================================================== -->
+    <section id="education" class="section education">
+      <p class="section-label">04 / Education</p>
+      <h2 class="section-title">Where the foundation was built</h2>
+
+      <div class="glass-card education-card">
+        <div class="edu-marker"></div>
+        <div class="edu-content">
+          <h3 class="edu-degree">B.Sc. Computer Science</h3>
+          <p class="edu-school">Swami Dayananda College, Manjakkudi, Thiruvarur, Tamil Nadu</p>
+          <p class="edu-status">Final Year — Expected Graduation 2027</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         CONTACT SECTION
+    ==================================================================== -->
+    <section id="contact" class="section contact">
+      <p class="section-label">05 / Contact</p>
+      <h2 class="section-title">Let's build something</h2>
+      <p class="contact-sub">Hiring for a fresher role, or just want to talk code? My inbox is open.</p>
+
+      <div class="contact-grid">
+        <div class="glass-card contact-info">
+          <a href="mailto:veerasingamm30@gmail.com" class="contact-line">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">veerasingamm30@gmail.com</span>
+          </a>
+          <a href="tel:+918807872577" class="contact-line">
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">+91 88078 72577</span>
+          </a>
+          <a href="https://github.com/veerasingamm30-code" target="_blank" rel="noopener" class="contact-line">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">github.com/veerasingamm30-code</span>
+          </a>
+          <a href="assets/Veerasingam_Resume.pdf" class="contact-line" download="Veerasingam_Resume.pdf">
+            <span class="contact-label">Resume</span>
+            <span class="contact-value">Download PDF</span>
+          </a>
+          <div class="contact-line contact-line-static">
+            <span class="contact-label">Location</span>
+            <span class="contact-value">Kumbakonam, Tamil Nadu, India</span>
+          </div>
+        </div>
+
+        <!-- Note: this form has no backend yet. script.js just shows a
+             success message on submit. Connect it to a service like
+             Formspree, EmailJS, or your own backend when ready. -->
+        <form class="glass-card contact-form" id="contact-form">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" id="name" name="name" required placeholder="Your name">
+
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" required placeholder="you@example.com">
+
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-input" id="message" name="message" rows="4" required placeholder="What are you building?"></textarea>
+
+          <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <svg class="lion-mark lion-mark-footer" viewBox="0 0 400 400" aria-hidden="true">
+      <path d="M200 60c-18 0-33 14-38 32-14-6-30-2-38 10-10-14-30-16-42-6-10 8-12 24-4 36-16 4-26 20-22 36 3 12 14 20 26 20-6 16 2 34 18 40 14 5 28 0 36-10 8 14 24 22 40 22s32-8 40-22c8 10 22 15 36 10 16-6 24-24 18-40 12 0 23-8 26-20 4-16-6-32-22-36 8-12 6-28-4-36-12-10-32-8-42 6-8-12-24-16-38-10-5-18-20-32-38-32z" fill="none" stroke="url(#lionGradFooter)" stroke-width="1.5"/>
+      <defs>
+        <linearGradient id="lionGradFooter" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#00d4ff"/>
+          <stop offset="1" stop-color="#a855f7"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <p class="footer-text">Veerasingam M — Lion King Veerasingam. Play Bold.</p>
+    <p class="footer-year">&copy; <span id="footer-year"></span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
